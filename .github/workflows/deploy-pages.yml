@@ -25,7 +25,7 @@ jobs:
           # Remove GitHub workflow files from publish folder
           rm -rf public/.github public/.git
 
-      - name: Diagnostic: list public/ contents
+      - name: "Diagnostic: list public/ contents"
         run: |
           echo "Listing public/ contents (pwd=$(pwd))"
           ls -la public || true
