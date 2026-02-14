@@ -141,8 +141,8 @@
   // You can personalize them directly here.
   const LETTERS = [
     "Letter 1: Hi Rudra, I just want to say how much I care about you and how happy you make me. I love how your smile lights up my life :)   ",
-    "Letter 2: Let's tick off items from the bucket list and make unforgettable memories together.",
-  "Letter 3: Hmm, so you opened the third letter...Busy making a teleportation machine to be with you ❤️."
+    "Letter 2: Thank you for being the amazing person you are. I feel so lucky to have you in my life and I can't wait to create more wonderful memories together.",
+  "Letter 3: Hmm, so you opened the third letter...Brb busy making a teleportation machine to be with you ❤️."
   ];
 
   const yesPanel = document.getElementById('yes-panel');
