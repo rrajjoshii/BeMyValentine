@@ -25,6 +25,13 @@ jobs:
           # Remove GitHub workflow files from publish folder
           rm -rf public/.github public/.git
 
+      - name: Diagnostic: list public/ contents
+        run: |
+          echo "Listing public/ contents (pwd=$(pwd))"
+          ls -la public || true
+          echo "Disk usage for public/"
+          du -sh public || true
+
       - name: Configure Pages
         uses: actions/configure-pages@v3
 
