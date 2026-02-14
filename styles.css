@@ -1,0 +1,81 @@
+:root{
+  --bg: #fff6f8;
+  --card-bg: #fff;
+  --accent: #ff3860;
+  --accent-2: #ffb6c1;
+  --muted: #666;
+  --radius: 14px;
+  --shadow: 0 12px 32px rgba(0,0,0,0.08);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--sans);background:linear-gradient(180deg,var(--bg),#fff);color:#222;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
+
+/* Background hearts */
+.bg-hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.bg-heart{position:absolute;width:28px;height:28px;transform:translateY(0);opacity:0.9}
+.bg-heart svg{width:100%;height:100%}
+.float-up{animation:floatUp linear infinite}
+@keyframes floatUp{0%{transform:translateY(110vh) scale(0.6) rotate(0deg);opacity:0}10%{opacity:1}100%{transform:translateY(-20vh) scale(1) rotate(360deg);opacity:0}}
+
+/* make sure page content sits above hearts */
+.card{position:relative;z-index:2}
+.page{width:100%;max-width:920px}
+.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;text-align:center;position:relative}
+.card{overflow:visible}
+.title{font-size:2.2rem;margin:4px 0 12px}
+.sub{color:var(--muted);margin-top:8px}
+.gif-wrap{display:flex;align-items:center;justify-content:center;margin:12px 0}
+.main-gif{width:100%;max-width:560px;height:auto;border-radius:10px}
+.controls{display:flex;gap:18px;align-items:center;justify-content:center;height:80px;position:relative}
+.controls.stacked{flex-direction:column;height:auto}
+.btn{font-size:1.2rem;padding:14px 28px;border-radius:12px;border:0;cursor:pointer;min-width:140px}
+.btn-yes{background:linear-gradient(180deg,var(--accent),#ff6b8a);color:white;box-shadow:0 8px 24px rgba(255,54,100,0.16)}
+.btn-no{background:var(--accent-2);color:#6b0016;position:relative}
+.btn:focus{outline:3px solid rgba(255,56,96,0.18);outline-offset:3px}
+.options{margin-top:12px;text-align:center}
+.muted{color:#444;font-size:0.95rem}
+.notes{margin-top:18px;text-align:left;font-size:0.95rem;color:#444}
+
+/* YES panel and gifts */
+.hidden{display:none}
+.yes-panel{margin-top:18px;padding:16px;border-radius:12px;background:linear-gradient(180deg,#fff6f8,#fff);box-shadow:0 6px 18px rgba(0,0,0,0.04);text-align:center}
+.yes-heading{color:var(--accent);margin:0 0 6px}
+.yes-message{margin:0 0 14px;color:var(--muted)}
+.gifts{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.gift{width:200px;min-height:160px;border-radius:12px;background:#fff0f2;border:2px dashed rgba(255,54,100,0.12);display:flex;align-items:flex-start;justify-content:flex-start;flex-direction:column;padding:14px;cursor:pointer;position:relative}
+.gift .gift-title{font-weight:700;color:#c83b5a;margin-bottom:8px;display:inline-flex;align-items:center;gap:8px}
+.gift .gift-emoji{font-size:20px;line-height:1;display:inline-block}
+.gift .gift-title-text{display:inline-block}
+.gift .gift-letter{display:none;padding:8px;color:#333;text-align:left;font-size:1rem;line-height:1.35;overflow:auto;max-height:200px}
+.gift.revealed{background:linear-gradient(180deg,#fff,#fff6f8)}
+.gift.revealed .gift-letter{display:block}
+.yes-actions{margin-top:12px}
+.gift:focus{outline:3px solid rgba(255,56,96,0.16);outline-offset:3px}
+
+/* Animations */
+.wiggle{animation:wiggle 0.6s ease-in-out}
+@keyframes wiggle{0%{transform:rotate(0)}25%{transform:rotate(-8deg)}75%{transform:rotate(8deg)}100%{transform:rotate(0)}}
+
+/* small screens */
+@media (max-width:480px){body{padding:18px}.card{padding:18px}.title{font-size:1.6rem}.main-gif{max-width:360px}.btn{min-width:120px;padding:12px 18px;font-size:1.05rem}}
+
+/* reduce number/size on small screens */
+@media (max-width:480px){.bg-heart{width:20px;height:20px}}
+
+/* Mobile pink theme tweaks */
+@media (max-width:480px){
+  body{background:linear-gradient(180deg,#fff0f4,#fff6f8)}
+  .card{background:linear-gradient(180deg,#ffffff,#fff4f8);box-shadow:0 10px 30px rgba(255,90,130,0.08)}
+  .title{color:#c81b4a}
+  .btn-yes{background:linear-gradient(180deg,#ff7a97,#ff4b76);box-shadow:0 6px 18px rgba(255,80,120,0.18)}
+  .btn-no{background:#ffdce6;color:#7a0020}
+  .yes-panel{background:linear-gradient(180deg,#fff7fb,#fff4fb)}
+}
+
+/* Mobile overlay and script font */
+@media (max-width:480px){
+  .heart-overlay{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 20% 30%, rgba(255,200,220,0.35), transparent 20%), radial-gradient(circle at 80% 70%, rgba(255,220,230,0.25), transparent 20%);z-index:1}
+  .title{font-family:'Dancing Script', cursive;font-size:2rem}
+  .btn{font-family:'Dancing Script', cursive}
+}

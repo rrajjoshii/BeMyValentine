@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-label="Celebration">
+	<rect width="100%" height="100%" fill="#fffaf6" rx="12"/>
+	<g transform="translate(320,130)">
+		<g>
+			<circle cx="-60" cy="-10" r="6" fill="#ff6b8a"/>
+			<circle cx="0" cy="-30" r="8" fill="#ffd166"/>
+			<circle cx="50" cy="-5" r="6" fill="#8ad1c2"/>
+		</g>
+		<g transform="translate(0,70)">
+			<path d="M0,-36 C20,-60 60,-60 60,-28 C60,4 0,36 0,36 C0,36 -60,4 -60,-28 C-60,-60 -20,-60 0,-36 Z" fill="#ff9fb1" stroke="#ff6b8a" stroke-width="2"/>
+		</g>
+	</g>
+</svg>
