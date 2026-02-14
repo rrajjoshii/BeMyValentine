@@ -41,6 +41,4 @@ jobs:
         with:
           publish_dir: ./public
           publish_branch: gh-pages
-          # Use the default GITHUB_TOKEN to push; token is provided automatically
-          # If you prefer a personal access token, set it as a secret and reference it here
-          # github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
