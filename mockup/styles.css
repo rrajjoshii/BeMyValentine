@@ -1,0 +1,67 @@
+/* Shared mockup styles: design tokens and responsive layout */
+:root{
+  --bg: #fff6f8;
+  --card-bg: #ffffff;
+  --accent: #ff3860; /* bright pink/red */
+  --accent-2: #ffb6c1;
+  --muted: #666;
+  --radius: 14px;
+  --shadow: 0 8px 24px rgba(0,0,0,0.08);
+  --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:var(--sans);
+  background:linear-gradient(180deg, var(--bg), #fff);
+  color:#222;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:32px;
+}
+
+.page{width:100%; max-width:920px}
+.card{
+  background:var(--card-bg);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:28px;
+  text-align:center;
+}
+
+.title{font-size:2.2rem; margin:4px 0 12px;}
+.sub{color:var(--muted); margin-top:8px}
+
+.gif-wrap{display:flex; align-items:center; justify-content:center; margin:12px 0;}
+.main-gif{width:100%; max-width:560px; height:auto; border-radius:10px;}
+
+.controls{display:flex; gap:18px; align-items:center; justify-content:center; height:72px; position:relative;}
+.controls.stacked{flex-direction:column; height:auto;}
+
+.btn{font-size:1.2rem; padding:14px 28px; border-radius:12px; border:0; cursor:pointer; min-width:140px;}
+.btn-yes{background:linear-gradient(180deg,var(--accent), #ff6b8a); color:white; box-shadow:0 6px 20px rgba(255,54,100,0.18);}
+.btn-yes.clicked{transform:scale(0.98);}
+
+.btn-no{background:var(--accent-2); color:#6b0016; position:relative;}
+.btn-no.wiggle{animation:wiggle 0.6s ease-in-out;}
+
+.wiggle{animation:wiggle 0.6s ease-in-out}
+@keyframes wiggle{ 0%{transform:rotate(0)} 25%{transform:rotate(-8deg)} 75%{transform:rotate(8deg)} 100%{transform:rotate(0)} }
+
+.notes{margin-top:18px; text-align:left; font-size:0.95rem; color:#444}
+
+/* Mobile adjustments */
+@media (max-width:480px){
+  body{padding:18px}
+  .card{padding:18px}
+  .title{font-size:1.5rem}
+  .main-gif{max-width:360px}
+  .btn{min-width:120px; padding:12px 18px; font-size:1.05rem}
+  .controls{gap:12px}
+}
+
+/* Small helper for accessibility focus */
+.btn:focus{outline:3px solid rgba(255,56,96,0.18); outline-offset:3px}

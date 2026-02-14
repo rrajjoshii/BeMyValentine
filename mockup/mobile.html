@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mockup — Will you be my Valentine? (Mobile)</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page mobile" id="page-mobile">
+    <div class="card">
+      <h1 class="title">Will you be my Valentine?</h1>
+
+      <div class="gif-wrap" id="gif-wrap-mobile" aria-live="polite">
+        <img id="main-gif-mobile" class="main-gif" src="assets/placeholder-begging.png" alt="Puppy with big, begging eyes (placeholder)" />
+      </div>
+
+      <div class="controls stacked" id="controls-mobile">
+        <button id="yes-mobile" class="btn btn-yes" aria-label="Yes, I'll be your Valentine">YES</button>
+        <button id="no-mobile" class="btn btn-no" aria-label="No, not this time">NO</button>
+      </div>
+
+      <p class="sub small">Tip: on touch devices the NO button will wiggle instead of evading to keep it tappable.</p>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    // Mobile mockup interactions: swap GIF on YES, move NO to a random spot on first tap
+    (function(){
+      const yes = document.getElementById('yes-mobile');
+      const no = document.getElementById('no-mobile');
+      const mainGif = document.getElementById('main-gif-mobile');
+
+      yes.addEventListener('click', () => {
+        mainGif.src = 'assets/placeholder-celebrate.png';
+        mainGif.alt = 'Celebration: hearts and confetti (placeholder)';
+        if (typeof confetti === 'function') confetti({ particleCount: 40, spread: 55, origin: { y: 0.6 } });
+      });
+
+      let moved = false;
+      function moveNoRandomly(button) {
+        const container = document.querySelector('.card');
+        const containerRect = container.getBoundingClientRect();
+        const btnRect = button.getBoundingClientRect();
+        const maxX = Math.max(0, containerRect.width - btnRect.width - 8);
+        const maxY = Math.max(0, containerRect.height - btnRect.height - 8);
+        const targetX = Math.floor(Math.random() * (maxX + 1));
+        const targetY = Math.floor(Math.random() * (maxY + 1));
+        const currentLeft = btnRect.left - containerRect.left;
+        const currentTop = btnRect.top - containerRect.top;
+        const deltaX = targetX - currentLeft;
+        const deltaY = targetY - currentTop;
+        button.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+      }
+
+      no.addEventListener('click', (e) => {
+        if (!moved) {
+          moveNoRandomly(no);
+          moved = true;
+          e.preventDefault();
+          e.stopPropagation();
+        } else {
+          alert('You pressed NO (mobile mockup)');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

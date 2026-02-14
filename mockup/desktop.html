@@ -1,0 +1,98 @@
+<!doctype html>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    // Lightweight preview interactions for the mockup page.
+    (function(){
+      const yes = document.getElementById('yes-btn');
+      const no = document.getElementById('no-btn');
+      const mainGif = document.getElementById('main-gif');
+
+      // Helper to move the NO button to a random location within the .card area
+      function moveNoRandomly(button) {
+        const container = document.querySelector('.card');
+        const containerRect = container.getBoundingClientRect();
+        const btnRect = button.getBoundingClientRect();
+
+        // Compute a random target top-left inside the container bounds (safe area)
+        const maxX = Math.max(0, containerRect.width - btnRect.width - 8);
+        const maxY = Math.max(0, containerRect.height - btnRect.height - 8);
+        const targetX = Math.floor(Math.random() * (maxX + 1));
+        const targetY = Math.floor(Math.random() * (maxY + 1));
+
+        // Current position of the button relative to container
+        const currentLeft = btnRect.left - containerRect.left;
+        const currentTop = btnRect.top - containerRect.top;
+
+        const deltaX = targetX - currentLeft;
+        const deltaY = targetY - currentTop;
+
+        // Apply transform as a delta so the layout is preserved and we can reset later
+        button.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+      }
+
+      // Preview: swap image when YES is clicked and fire confetti (if available)
+      yes.addEventListener('click', () => {
+        mainGif.src = 'assets/placeholder-celebrate.png';
+        mainGif.alt = 'Celebration: hearts and confetti (placeholder)';
+        yes.classList.add('clicked');
+
+        // Fire a small confetti burst if confetti is loaded
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+        }
+      });
+
+      // On desktop, use mouseenter to move NO around both horizontally and vertically
+      no.addEventListener('mouseenter', () => {
+        moveNoRandomly(no);
+      });
+
+      // Reset transform when mouse leaves the card so NO returns to its original spot
+      document.querySelector('.card').addEventListener('mouseleave', () => {
+        no.style.transform = '';
+      });
+
+      // Accessibility note: allow keyboard users to click NO normally (no blocking)
+      no.addEventListener('focus', () => { no.classList.add('focused'); });
+      no.addEventListener('blur', () => { no.classList.remove('focused'); });
+    })();
+  </script>
+      const mainGif = document.getElementById('main-gif');
+      const gifWrap = document.getElementById('gif-wrap');
+
+      // Preview: swap image when YES is clicked.
+      yes.addEventListener('click', () => {
+        mainGif.src = 'assets/placeholder-celebrate.png';
+        mainGif.alt = 'Celebration: hearts and confetti (placeholder)';
+        yes.classList.add('clicked');
+      });
+
+      // Demo NO behavior: on mouseenter, move the NO button to a random location within the controls area.
+      no.addEventListener('mouseenter', (e) => {
+        const controls = document.getElementById('controls');
+        const rect = controls.getBoundingClientRect();
+        const btnRect = no.getBoundingClientRect();
+        // Compute safe area for top-left of button
+        const maxX = Math.max(0, rect.width - btnRect.width);
+        const maxY = Math.max(0, rect.height - btnRect.height);
+        const x = Math.floor(Math.random() * (maxX + 1));
+        const y = Math.floor(Math.random() * (maxY + 1));
+        no.style.transform = `translate(${x}px, ${y}px)`;
+      });
+
+      // Reset transform when mouse leaves the controls container
+      document.getElementById('controls').addEventListener('mouseleave', () => {
+        no.style.transform = '';
+      });
+
+      // Accessibility note: allow keyboard users to click NO normally (no blocking)
+      no.addEventListener('focus', () => {
+        no.classList.add('focused');
+      });
+      no.addEventListener('blur', () => {
+        no.classList.remove('focused');
+      });
+    })();
+  </script>
+</body>
+</html>
