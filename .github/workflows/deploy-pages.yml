@@ -18,12 +18,18 @@ jobs:
 
       - name: Prepare site directory
         run: |
-          # Copy repository contents into a clean public/ folder for publishing
+          # Create clean public/ and copy only the site files we expect
           mkdir -p public
-          shopt -s dotglob || true
-          cp -R ./* public/
-          # Remove GitHub workflow files from publish folder
-          rm -rf public/.github public/.git
+          set -e
+          echo "Copying explicit site files into public/"
+          for f in index.html styles.css app.js README.md; do
+            if [ -f "$f" ]; then cp "$f" public/; else echo "warning: $f not found"; fi
+          done
+          if [ -d assets ]; then cp -R assets public/; else echo "warning: assets/ not found"; fi
+          # Ensure we don't accidentally publish hidden repo files
+          rm -rf public/.github public/.git || true
+          # Prevent Jekyll from processing
+          touch public/.nojekyll
 
       - name: "Diagnostic: list public/ contents"
         run: |
